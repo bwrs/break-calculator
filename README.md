@@ -1,0 +1,1 @@
+This program takes four parameters: first, the number of rooms, second, the number of rounds, third, the number of teams, and fourth, the number of desired samples, to output the likelihood of various scenarios; these scenarios include the number of points required and the number of teams with that number of points who will break; the program uses the Monte Carlo method.
