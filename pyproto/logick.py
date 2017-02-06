@@ -2,7 +2,7 @@ import random
 
 rooms=int(input("enter #rooms: "))
 rounds=int(input("enter #rounds: "))
-posquery=int(input("enter #people in final: "))
+posquery=int(input("enter #teams in final: "))
 times=int(input("enter #times to run:"))
 
 def split(t):
