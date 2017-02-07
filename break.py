@@ -19,7 +19,7 @@ def main():
     n = int(input("Number of iterations (recommended 1000+): "))
     s = [process([0 for i in range(t)],r) for i in range(n)]
     m = [[list(set(br[-f:]))[0]] for br in s]
-    prob = [(m[i][0],s[i][-f:].count(m[i][0]),s[i].count(m[i][0])) for i in range(len(m))]
-    d = dict(Counter(prob))
+    p = [(m[i][0],s[i][-f:].count(m[i][0]),s[i].count(m[i][0])) for i in range(len(m))]
+    d = dict(Counter(p))
     for x in sorted(d.keys(), key = lambda x: -d[x]):
         print(str(x[1])+"/"+str(x[2])+" on "+str(x[0])+" points: "+str(round((d[x]/n)*100,3))+"%")
