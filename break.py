@@ -52,12 +52,11 @@ def displayd(d):
     d2=quickify(d)
     for k in sorted(list(d2)):
         print(str(k)+": "+str((float(d2[k])/float(times))*100)+"%")
-    print("Sorted by number")
-    for k in sorted(list(d)):
-        print(str(k[1])+"/"+str(k[2])+" teams on "+str(k[0])+" points"+": "+str((float(d[k])/float(times))*100)+"%")
-    print ("Sorted by compound")
+    print ("Sorted by compound (cumulatively)")
+    t=0.0
     for k in sorted(list(d), key=lambda x: 2*x[0]+(float(x[1])/x[2])):
-        print(str(k[1])+"/"+str(k[2])+" teams on "+str(k[0])+" points"+": "+str((float(d[k])/float(times))*100)+"%")
+        t+=(float(d[k])/float(times))*100
+        print(str(k[1])+"/"+str(k[2])+" teams on "+str(k[0])+" points"+": "+str(t)+"%; increase of "+str((float(d[k])/float(times))*100)+"%")
     print("Sorted by probability")
     for k in sorted([list(x) for x in d.items()],key=lambda x: -x[1]):
         print(str(k[0][1])+"/"+str(k[0][2])+" teams on "+str(k[0][0])+" points: "+str((float(d[k[0]])/float(times))*100)+"%")
