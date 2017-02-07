@@ -3,7 +3,7 @@ import random
 rooms=int(input("Number of rooms: "))
 rounds=int(input("Number of rounds: "))
 posquery=int(input("Number of breaking teams: "))
-times=int(input("Number of samples (recommended 1000+):"))
+times=int(input("Number of samples (recommended 10000+):"))
 
 def split(t):
     t.sort()
@@ -38,7 +38,20 @@ def main():
             d[x]=1
     return d
 
+def quickify(d):
+    d2={}
+    for i in list(d):
+        if i[0] in d2:
+            d2[i[0]]+=d[i]
+        else:
+            d2[i[0]]=d[i]
+    return d2
+
 def displayd(d):
+    print("Quick output")
+    d2=quickify(d)
+    for k in sorted(list(d2)):
+        print(str(k)+": "+str((float(d2[k])/float(times))*100)+"%")
     print("Sorted by number")
     for k in sorted(list(d)):
         print(str(k[1])+"/"+str(k[2])+" teams on "+str(k[0])+" points"+": "+str((float(d[k])/float(times))*100)+"%")
