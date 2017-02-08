@@ -1,65 +1,27 @@
-import random
+from operator import add
+from collections import Counter
+from itertools import chain
+from random import shuffle
 
-rooms=int(input("Number of rooms: "))
-rounds=int(input("Number of rounds: "))
-posquery=int(input("Number of breaking teams: "))
-times=int(input("Number of samples (recommended 10000+):"))
+def gen(shufflee = list(range(4))):
+    shuffle(shufflee)
+    return shufflee
 
-def split(t):
-    t.sort()
-    l=[]
-    for i in range(rooms):
-        l.append(t[4*i:4*i+4])
-    return l
-
-def iteratione(t):
-    l=[]
-    rs=split(t)
-    for i in range(len(rs)):
-        random.shuffle(rs[i])
-        for ii in range(4):
-            l.append(rs[i][ii]+ii)
-    return l
-
-def run():
-    t=[0 for i in range(rooms*4)]
-    for i in range(rounds): t=iteratione(t)
-    t.sort()
-    k=t[-posquery]
-    return (k,t[-posquery:].count(k),t.count(k))
+def process(tab,rounds,rm):
+    for i in range(rounds):
+        tab = sorted(list(map(add,tab,list(chain(*[gen() for i in range(rm)])))))
+    return sorted(tab)
 
 def main():
-    d={}
-    for i in range(times):
-        x=run()
-        if x in d:
-            d[x]+=1
-        else:
-            d[x]=1
-    return d
+    rm = int(input("Number of rooms: "))
+    r = int(input("Number of rounds: "))
+    f = int(input("Number of breaking teams: "))
+    n = int(input("Number of iterations (recommended 1000+): "))
+    s = [process([[0]*rm*4][0],r,rm) for i in range(n)]
+    m = [list(set(br[-f:]))[0] for br in s]
+    p = [(m[i],s[i][-f:].count(m[i]),s[i].count(m[i])) for i in range(len(m))]
+    d = dict(Counter(p))
+    for x in sorted(d.keys(), key = lambda x: -d[x]):
+        print(str(x[1])+"/"+str(x[2])+" on "+str(x[0])+" points: "+str(round((d[x]/n)*100,3))+"%")
 
-def quickify(d):
-    d2={}
-    for i in list(d):
-        if i[0] in d2:
-            d2[i[0]]+=d[i]
-        else:
-            d2[i[0]]=d[i]
-    return d2
-
-def displayd(d):
-    print("Quick output")
-    d2=quickify(d)
-    for k in sorted(list(d2)):
-        print(str(k)+": "+str((float(d2[k])/float(times))*100)+"%")
-    print ("Sorted by compound (cumulatively)")
-    t=0.0
-    for k in sorted(list(d), key=lambda x: 2*x[0]+(float(x[1])/x[2])):
-        t+=(float(d[k])/float(times))*100
-        print(str(k[1])+"/"+str(k[2])+" teams on "+str(k[0])+" points"+": "+str(t)+"%; increase of "+str((float(d[k])/float(times))*100)+"%")
-    print("Sorted by probability")
-    for k in sorted([list(x) for x in d.items()],key=lambda x: -x[1]):
-        print(str(k[0][1])+"/"+str(k[0][2])+" teams on "+str(k[0][0])+" points: "+str((float(d[k[0]])/float(times))*100)+"%")
-
-d=main()
-displayd(d)
+main()
