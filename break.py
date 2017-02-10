@@ -47,11 +47,22 @@ def quickify(d):
             d2[i[0]]=d[i]
     return d2
 
+def quickplus(d):
+    s=set([k[0] for k in d])
+    d2={x:0 for x in s}
+    for k in list(d):
+        for kk in s:
+            if k[0]<kk:
+                d2[kk]+=d[k]
+            elif k[0]==kk:
+                d2[kk]+=d[k]*(k[1]/float(k[2]))
+    return d2
+
 def displayd(d):
     print("Quick output")
-    d2=quickify(d)
+    d2=quickplus(d)
     for k in sorted(list(d2)):
-        print(str(k)+": "+str((float(d2[k])/float(times))*100)+"%")
+        print("Teams with "+str(k)+" points have a "+str(100*(d2[k]/float(times)))+"% chance of breaking.")
     print ("Sorted by compound (cumulatively)")
     t=0.0
     for k in sorted(list(d), key=lambda x: 2*x[0]+(float(x[1])/x[2])):
