@@ -13,6 +13,8 @@ from random import shuffle as 𐎣
 𐎠𐎽=str
 𐎠𐎾=sorted
 𐎠𐎿=__name__
+#𐎠𐏀
+𐎠𐏁=int
 
 from operator import add
 from itertools import chain
@@ -44,11 +46,11 @@ class 𐎠𐎮(𐎠𐎤):
         𐎠𐎬.add_widget(𐎠𐎸.𐎠𐎪)
         𐎠𐎭 = 𐎠𐎦(text="Compute")
         𐎠𐎬.add_widget(𐎠𐎭)
-        𐎠𐎭.bind(on_press=𐎠𐎸.buttonClicked)
+        𐎠𐎭.bind(on_press=𐎠𐎸.𐎠𐏀)
         return 𐎠𐎬
 
-    def buttonClicked(𐎠𐎸,𐎠𐎹):
-        𐎠𐎸.𐎠𐎪.text = "\n.".join(𐎥(*[int(𐎦[𐎠𐎫].text) for 𐎠𐎫 in 𐎠𐎶(𐎠𐎺+𐎠𐎺+𐎠𐎺)]))
+    def 𐎠𐏀(𐎠𐎸,𐎠𐎹):
+        𐎠𐎸.𐎠𐎪.text = "\n.".join(𐎥(*[𐎠𐏁(𐎦[𐎠𐎫].text) for 𐎠𐎫 in 𐎠𐎶(𐎠𐎺+𐎠𐎺+𐎠𐎺)]))
 
 def 𐎩(𐎲,𐎱):
     𐎲.sort()
