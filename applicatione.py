@@ -15,6 +15,7 @@ from random import shuffle as 𐎣
 𐎠𐎿=__name__
 #𐎠𐏀
 𐎠𐏁=int
+𐎠𐏂=bool
 
 from operator import add
 from itertools import chain
@@ -39,7 +40,7 @@ class 𐎠𐎮(𐎠𐎤):
         for 𐏃 in 𐎠𐎶(𐎠𐎷(𐎨)):
             𐎧[𐏃] = 𐎠𐎨(text="Number of "+𐎨[𐏃])
             𐎠𐎬.add_widget(𐎧[𐏃])
-            𐎦[𐏃] =  𐎠𐎩(text='', multiline=False)
+            𐎦[𐏃] =  𐎠𐎩(text='', multiline=𐎠𐏂(𐎠𐎺-𐎠𐎺))
             𐎠𐎬.add_widget(𐎦[𐏃])
         
         𐎠𐎸.𐎠𐎪 = 𐎠𐎨(text="")
